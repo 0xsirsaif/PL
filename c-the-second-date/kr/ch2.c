@@ -53,9 +53,62 @@ int lower(char c){
     return 0;
 }
 
+// Exercise 2-3. Write a function htoi(s), which converts a string of hexadecimal digits (including an optional 0x or 0X)
+// into its equivalent integer value. The allowable digits are 0 through 9, a through f, and A through F.
+#define HEX_BASE 16
+#define HEX_A 10
+
+long int power(int base, int exp){
+    long int result = 1;
+    for (int i = 0; i < exp; ++i) {
+        result *= base;
+    }
+    return result;
+}
+
+long int htoi(char s[]){
+    // get string size, first
+    int j = 0;
+    int size = 0;
+    int start = 0;
+    while (s[j] != '\0'){
+        if (s[j] == '0' && s[j+1] == 'x'){
+            start = 2;
+            ++j;
+        } else {
+            size += 1;
+        }
+        ++j;
+    }
+
+    printf("------------------\n");
+    printf("input: %s\n", s);
+    printf("------------------\n");
+    int i = start;
+    int unit = size - 1;
+    long int answer = 0;
+    while (s[i] != '\0'){
+        if (s[i] >= '0' && s[i] <= '9'){
+            answer += (s[i] - '0') * power(HEX_BASE, unit);
+            printf("expression: %c * Power(16, %d)\n", s[i], unit);
+        } else if (s[i] >= 'a' && s[i] <= 'f') {
+            answer += ((s[i] - 'a') + HEX_A) * power(HEX_BASE, unit);
+            printf("expression: %c * Power(16, %d)\n", s[i], unit);
+        } else if (s[i] >= 'A' && s[i] <= 'F'){
+            answer += ((s[i] - 'A') + HEX_A) * power(HEX_BASE, unit);
+            printf("expression: %c * Power(16, %d)\n", s[i], unit);
+        }
+        i += 1;
+        unit -= 1;
+    }
+    printf("------------------\n");
+    printf("answer: %ld\n", answer);
+    printf("------------------\n");
+    return answer;
+}
+
+
 int main(void){
-    int cc = lower('D');
-    printf("%c\n", cc);
-    printf("%d\n", isdigit('9'));
+    htoi("0x123abcABC");
     return 0;
 }
