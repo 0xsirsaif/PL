@@ -40,20 +40,28 @@ int strlen_1(char *s, char s2[]){
 }
 
 
-int main(void){
-    alloc(950);
-    alloc(950);
-    afree(array+950);
-    alloc(950);
+int main(int argc, char *argv[]){
+    if (argc == 1){
+        printf("No arguments have been passed!\n");
+    }
+    for (int i = 1; i < argc; i++){
+        printf("%s\n", argv[i]); // 
+        printf("%s\n", *(argv+i)); // argv is a pointer to an array of pointers
+    }
 
-    printf("%d\n", strlen_1("mohamed", "mohamed"));
-
-    char array[7] = "mohamed";
-    printf("%d\n", strlen_1(array, array));
-
-    char *ptr;
-    ptr = array;
-    printf("%d\n", strlen_1(ptr, ptr));
+//    alloc(950);
+//    alloc(950);
+//    afree(array+950);
+//    alloc(950);
+//
+//    printf("%d\n", strlen_1("mohamed", "mohamed"));
+//
+//    char array[7] = "mohamed";
+//    printf("%d\n", strlen_1(array, array));
+//
+//    char *ptr;
+//    ptr = array;
+//    printf("%d\n", strlen_1(ptr, ptr));
 
     return 0;
 }
